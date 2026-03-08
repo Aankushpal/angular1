@@ -1,12 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LoginComponent } from './login/login';
+import { Custom } from "./custom/custom";
+import { Counter } from './counter/counter';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [LoginComponent, Custom, Counter],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('demo1');
+  protected readonly title = signal('Ankush');
 }
