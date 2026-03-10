@@ -1,1 +1,21 @@
 <h1>this is the custom component!!</h1>
+<p>{{ name }}</p>
+
+<ul>
+    <!-- * This *ngFor is the older version way to use for loop and it is coming from the Common Module, so you have to import this in ts file  -->
+  <!-- <li *ngFor="let emp of data">
+      <h1>{{emp.name}}</h1>
+      <h3>{{emp.email}}</h3>
+      <h3>{{emp.city}}</h3>
+    </li> -->
+
+  @for (emp of data; track emp.id) {
+    <li>
+      <h1>{{ emp.name }}</h1>
+      <h3>{{ emp.email }}</h3>
+      <h3>{{ emp.city }}</h3>
+    </li>
+
+}
+<button (click) = "sendData()">Click me to send the data to the parent</button>
+</ul>

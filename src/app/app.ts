@@ -5,7 +5,7 @@ import { Counter } from './counter/counter';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent, Custom, Counter],
+  imports: [LoginComponent, Counter],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
