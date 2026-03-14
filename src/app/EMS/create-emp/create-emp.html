@@ -1,1 +1,35 @@
-<p>create-emp works!</p>
+<div class="flex">
+    <div class="employee-card">
+
+  <h2>Add New Employee</h2>
+
+  <div class="input-group">
+    <label>Name</label>
+    <input type="text" placeholder="Enter employee name" [(ngModel)]="name">
+  </div>
+
+  <div class="input-group">
+    <label>Role</label>
+    <div class="select-wrapper">
+      <select [(ngModel)]="role">
+        <option value="" disabled>Select a role</option>
+        <option value="developer">Developer</option>
+        <option value="manager">Manager</option>
+        <option value="designer">Designer</option>
+        <option value="tester">Tester</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>Salary</label>
+    <input type="text" placeholder="Salary" [(ngModel)] = "salary" (ngModelChange)="checkSalaryType()">
+    <p [ngStyle]="{'display' : !salaryCheck ? 'none': 'block', 'color' : 'red' }">Enter valid salary !!</p>
+  </div>
+
+  <button [ngClass]="salaryCheck ? 'pe-none' : '' " class="add-btn" (click)="addEmployee()">Add Employee</button>
+
+</div>
+<app-show-emp
+[empList] = "empList" [activeEmp] = "totalActive"></app-show-emp>
+</div>

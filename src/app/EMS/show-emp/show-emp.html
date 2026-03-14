@@ -1,1 +1,79 @@
-<p>show-emp works!</p>
+<div class="dashboard">
+
+  <!-- Top Controls -->
+  <div class="top-bar">
+
+    <div class="search-box">
+      <input type="text" placeholder="Search">
+    </div>
+
+    <div class="top-filter">
+      <select>
+        <option>All</option>
+        <option>Developer</option>
+        <option>Manager</option>
+        <option>Designer</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <!-- Role Filter Buttons -->
+  <div class="role-filters">
+    <button class="active">All</button>
+    <button>Developer</button>
+    <button>Manager</button>
+    <button>Designer</button>
+  </div>
+
+
+  <!-- Sort -->
+  <div class="sort-row">
+    <p>Active Employee: <span>{{activeEmp}}</span></p>
+
+    <div class="sort-box">
+      <select>
+        <option>Sort by Salary</option>
+        <option>Low → High</option>
+        <option>High → Low</option>
+      </select>
+    </div>
+  </div>
+
+
+  <!-- Employee Cards -->
+  <div class="employee-grid">
+
+        @if(empList.length > 0){
+  @for (emp of empList; track emp.id) {
+
+    <div class="employee-card">
+      <div class="card-top">
+        <h3>{{ emp.name }}</h3>
+        <span class="status" [ngClass]="emp.isActive? 'active' : 'inactive' ">{{ emp.isActive ? 'Active' : 'Inactive' }}</span>
+      </div>
+
+      <p>{{ emp.role }}</p>
+      <p>Salary: {{ emp.salary | currency:'INR' }}</p>
+
+      <div class="card-actions">
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+
+        <button class="delete-btn">Delete</button>
+      </div>
+    </div>
+
+  }
+} @else{
+  <p>Employee List is empty !!</p>
+}
+
+
+
+  </div>
+
+</div>
