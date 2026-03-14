@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Custom } from '../custom/custom';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [Custom],
+  imports: [Custom, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class LoginComponent {
   userName: string = 'Ankush!!';
 
-  data= [
+  data = [
     {
       id: 1,
       name: 'Rahul Sharma',
@@ -34,8 +35,8 @@ export class LoginComponent {
     },
   ];
 
-  rcvngDataFromChild:any;
-  reciverData(prop: string){
-    this.rcvngDataFromChild = prop
+  rcvngDataFromChild: any;
+  reciverData(prop: string) {
+    this.rcvngDataFromChild = prop;
   }
 }
