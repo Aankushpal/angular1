@@ -5,14 +5,14 @@
 
   <div class="input-group">
     <label>Name</label>
-    <input type="text" placeholder="Enter employee name" [(ngModel)]="name">
+    <input required type="text" placeholder="Enter employee name" [(ngModel)]="name" (ngModelChange)="validateForm()" >
+    <p [ngStyle]="{'display' : !nameCheck ? 'none': 'block', 'color' : 'red' }">Enter valid name !!</p>
   </div>
 
   <div class="input-group">
     <label>Role</label>
     <div class="select-wrapper">
       <select [(ngModel)]="role">
-        <option value="" disabled>Select a role</option>
         <option value="developer">Developer</option>
         <option value="manager">Manager</option>
         <option value="designer">Designer</option>
@@ -23,13 +23,18 @@
 
   <div class="input-group">
     <label>Salary</label>
-    <input type="text" placeholder="Salary" [(ngModel)] = "salary" (ngModelChange)="checkSalaryType()">
+    <input type="text" placeholder="Salary" [(ngModel)] = "salary" (ngModelChange)="validateForm()">
     <p [ngStyle]="{'display' : !salaryCheck ? 'none': 'block', 'color' : 'red' }">Enter valid salary !!</p>
   </div>
 
-  <button [ngClass]="salaryCheck ? 'pe-none' : '' " class="add-btn" (click)="addEmployee()">Add Employee</button>
+  <button [ngClass]="submitBtn ? 'pe-none' : '' " class="add-btn" (click)="addEmployee()" [disabled]="submitBtn">Add Employee</button>
 
 </div>
-<app-show-emp
-[empList] = "empList" [activeEmp] = "totalActive"></app-show-emp>
+<app-show-emp 
+            [empList] = "copyEmpList" 
+            [activeEmp] = "totalActiveEmployees()"
+            (deleteEmp)="deleteEmplyye($event)"
+            (searchEvent)="filterEmployee($event)"
+            [selectRole]="selectRole"
+></app-show-emp>
 </div>
