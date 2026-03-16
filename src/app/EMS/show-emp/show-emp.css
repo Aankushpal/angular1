@@ -107,12 +107,25 @@
   align-items:center;
 }
 
+.btns{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .delete-btn{
   padding:6px 14px;
   border-radius:8px;
   border:1px solid #555;
   background:white;
   cursor:pointer;
+}
+
+.edit-btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Toggle Switch */

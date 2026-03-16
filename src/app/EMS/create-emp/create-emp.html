@@ -27,7 +27,9 @@
     <p [ngStyle]="{'display' : !salaryCheck ? 'none': 'block', 'color' : 'red' }">Enter valid salary !!</p>
   </div>
 
-  <button [ngClass]="submitBtn ? 'pe-none' : '' " class="add-btn" (click)="addEmployee()" [disabled]="submitBtn">Add Employee</button>
+  <button [ngClass]="submitBtn ? 'pe-none' : '' " class="add-btn" (click)="addEmployee()" [disabled]="submitBtn">
+    {{ editId ? 'Update Employee' : 'Add Employee' }}
+  </button>
 
 </div>
 <app-show-emp 
@@ -35,6 +37,7 @@
             [activeEmp] = "totalActiveEmployees()"
             (deleteEmp)="deleteEmplyye($event)"
             (searchEvent)="filterEmployee($event)"
+            (editEvent)="addEmployee($event)"
             [selectRole]="selectRole"
 ></app-show-emp>
 </div>

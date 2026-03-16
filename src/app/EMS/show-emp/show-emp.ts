@@ -16,12 +16,18 @@ export class ShowEmp {
   @Input() selectRole:string = 'all';
 
   @Output() deleteEmp = new EventEmitter<number>();
-  @Output() searchEvent = new EventEmitter();
+  @Output() searchEvent = new EventEmitter<string>();
+  @Output() editEvent = new EventEmitter<number>();
 
 
   removeEmp(idx:number){
     console.log(idx)
     this.deleteEmp.emit(idx)
+  }
+
+  editEmp(id:number){
+    console.log(id)
+    this.editEvent.emit(id)
   }
 
   //! (ngModelChange) only works if the ngModel directive is present on the element

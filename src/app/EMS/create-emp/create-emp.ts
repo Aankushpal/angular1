@@ -25,43 +25,68 @@ export class CreateEmp {
   role: string = 'developer';
   salary!: number | string;
   salaryCheck: boolean = false;
-  nameCheck:boolean = false;
-  submitBtn:boolean = true;
+  nameCheck: boolean = false;
+  submitBtn: boolean = true;
   selectRole: string = 'all';
+  editId : number | null = null;
 
   copyMainList() {
-    this.copyEmpList = [...this.empList];
-  }
+  this.copyEmpList = [...this.empList];
+}
 
-  addEmployee() {
-    let obj = {
+addEmployee(val: number | null = null) {
+  console.log(val);
+
+  // This is for sending values in the form fields
+  if (val !== null) {
+    const findEmp = this.empList.find(emp => emp.id === val);
+    if (findEmp) {
+      this.name = findEmp.name;
+      this.role = findEmp.role;
+      this.salary = findEmp.salary;
+      this.editId = findEmp.id;
+    }
+    return;
+  } 
+  //  This is for updating the particular employee  instead of creating a new or delete the previous one and then create new one
+  if(this.editId != null){
+    this.empList = this.empList.map((emp) => 
+    emp.id == this.editId ? {...emp, name: this.name, role: this.role, salary: +this.salary} : emp)
+  }
+  // This is for creating new employee
+  else {
+    const obj: Employee = {
       id: Date.now(),
       name: this.name,
       role: this.role,
       salary: +this.salary,
-      isActive: true,
+      isActive: true
     };
+
     console.log(obj);
+
     this.empList.push(obj);
-
-    this.copyMainList();
-
-    this.name = '';
-    this.salary = '';
-    this.role = 'developer';
-    this.salaryCheck = true;
   }
+
+  // Reset form
+  this.name = '';
+  this.salary = '';
+  this.role = 'developer';
+  this.salaryCheck = true;
+  
+  this.copyMainList();
+}
 
   validateForm() {
     let sal = +this.salary;
 
-   const invalidName = this.name.trim().length <= 0;
-   const invalidSalary = isNaN(sal) || sal <= 0;
+    const invalidName = this.name.trim().length <= 0;
+    const invalidSalary = isNaN(sal) || sal <= 0;
 
-   this.nameCheck = invalidName;
-   this.salaryCheck = invalidSalary;
+    this.nameCheck = invalidName;
+    this.salaryCheck = invalidSalary;
 
-   this.submitBtn = invalidName || invalidSalary;
+    this.submitBtn = invalidName || invalidSalary;
   }
 
   totalActiveEmployees() {
@@ -82,7 +107,7 @@ export class CreateEmp {
 
   filterEmployee(Val: string) {
     let searchVal = Val.toLowerCase().trim();
-    if ((searchVal == 'all')) {
+    if (searchVal == 'all') {
       this.copyEmpList = [...this.empList];
     } else {
       this.copyEmpList = this.empList.filter((emp) => {

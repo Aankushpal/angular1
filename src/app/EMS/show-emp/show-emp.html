@@ -1,10 +1,8 @@
 <div class="dashboard">
-
   <!-- Top Controls -->
   <div class="top-bar">
-
     <div class="search-box">
-      <input type="text" placeholder="Search" ngModel (ngModelChange)="searchEvent.emit($event)">
+      <input type="text" placeholder="Search" ngModel (ngModelChange)="searchEvent.emit($event)" />
     </div>
 
     <div class="top-filter">
@@ -16,23 +14,38 @@
         <option value="tester">Tester</option>
       </select>
     </div>
-
   </div>
-
 
   <!-- Role Filter Buttons -->
   <div class="role-filters">
-    <button [ngClass]="selectRole == 'all' ? 'active' : ' '" (click)="selectedRole('all')">All</button>
-    <button [ngClass]="selectRole == 'developer' ? 'active' : ' '" (click)="selectedRole('developer')">Developer</button>
-    <button [ngClass]="selectRole == 'manager' ? 'active' : ' '" (click)="selectedRole('manager')">Manager</button>
-    <button [ngClass]="selectRole == 'designer' ? 'active' : ' '" (click)="selectedRole('designer')">Designer</button>
-    <button [ngClass]="selectRole == 'tester' ? 'active' : ' '" (click)="selectedRole('tester')">Tester</button>
+    <button [ngClass]="selectRole == 'all' ? 'active' : ' '" (click)="selectedRole('all')">
+      All
+    </button>
+    <button
+      [ngClass]="selectRole == 'developer' ? 'active' : ' '"
+      (click)="selectedRole('developer')"
+    >
+      Developer
+    </button>
+    <button [ngClass]="selectRole == 'manager' ? 'active' : ' '" (click)="selectedRole('manager')">
+      Manager
+    </button>
+    <button
+      [ngClass]="selectRole == 'designer' ? 'active' : ' '"
+      (click)="selectedRole('designer')"
+    >
+      Designer
+    </button>
+    <button [ngClass]="selectRole == 'tester' ? 'active' : ' '" (click)="selectedRole('tester')">
+      Tester
+    </button>
   </div>
-
 
   <!-- Sort -->
   <div class="sort-row">
-    <p>Active Employee: <span>{{activeEmp}}</span></p>
+    <p>
+      Active Employee: <span>{{ activeEmp }}</span>
+    </p>
 
     <div class="sort-box">
       <select>
@@ -43,39 +56,36 @@
     </div>
   </div>
 
-
   <!-- Employee Cards -->
   <div class="employee-grid">
+    @if (empList.length > 0) {
+      @for (emp of empList; track emp.id; let i = $index) {
+        <div class="employee-card">
+          <div class="card-top">
+            <h3>{{ emp.name }}</h3>
+            <span class="status" [ngClass]="emp.isActive ? 'active' : 'inactive'">{{
+              emp.isActive ? 'Active' : 'Inactive'
+            }}</span>
+          </div>
 
-        @if(empList.length > 0){
-  @for (emp of empList; track emp.id; let i = $index) {
+          <p>{{ emp.role }}</p>
+          <p>Salary: {{ emp.salary | currency: 'INR' }}</p>
 
-    <div class="employee-card">
-      <div class="card-top">
-        <h3>{{ emp.name }}</h3>
-        <span class="status" [ngClass]="emp.isActive? 'active' : 'inactive' ">{{ emp.isActive ? 'Active' : 'Inactive' }}</span>
-      </div>
+          <div class="card-actions">
+            <label class="switch">
+              <input type="checkbox" checked [(ngModel)]="emp.isActive" />
+              <span class="slider"></span>
+            </label>
 
-      <p>{{ emp.role }}</p>
-      <p>Salary: {{ emp.salary | currency:'INR' }}</p>
-
-      <div class="card-actions">
-        <label class="switch">
-          <input type="checkbox" checked [(ngModel)]= "emp.isActive">
-          <span class="slider"></span>
-        </label>
-
-        <button class="delete-btn" (click) = "removeEmp(i)">Delete</button>
-      </div>
-    </div>
-
-  }
-} @else{
-  <h3>Employee List is empty !!</h3>
-}
-
-
-
+            <div class="btns">
+              <button class="delete-btn" (click)="removeEmp(i)">Delete</button>
+              <button class="edit-btn" (click)="editEmp(emp.id)">✏️</button>
+            </div>
+          </div>
+        </div>
+      }
+    } @else {
+      <h3>Employee List is empty !!</h3>
+    }
   </div>
-
 </div>
