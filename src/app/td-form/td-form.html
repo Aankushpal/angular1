@@ -1,0 +1,13 @@
+<p>td-form works!</p>
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <input type="text" required name="ename" ngModel placeholder="enter your name" />
+  <input type="email"
+   name="email" 
+   #email="ngModel"
+    ngModel
+    [ngStyle]="{'border-color' : email.untouched ? 'red' : ''}"
+    placeholder="enter your email" />
+  <input type="password" minlength="8" name="password" ngModel placeholder="enter your password" />
+  <button [ngStyle]="{ 'background-color': myForm.invalid ? 'red' : '' }">Submit</button>
+</form>
